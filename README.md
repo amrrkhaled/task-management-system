@@ -42,6 +42,9 @@ This is a **high-performance backend system** designed for **task management app
 ## 🔗 **How Api Works?**  
 # Task Management System API Documentation
 
+## Overview
+This API allows users to create projects, invite members or admins, manage tasks, and assign tasks to multiple members.
+
 ## Authentication
 All endpoints require authentication using a Bearer token.
 
@@ -78,28 +81,29 @@ POST /users/login
 
 #### Get all users for a project
 ```
-GET /projects/:projectId/users
+GET /projects/:projectId-P/users
 ```
 **Response:**
 ```json
 [
   {
-    "id": 1,
+    "id": 1-U,
     "name": "Alice Johnson",
-    "email": "alice@example.com"
+    "email": "alice@example.com",
+    "role": "member"
   }
 ]
 ```
 
 #### Get all users for a task
 ```
-GET /tasks/:taskId/users
+GET /tasks/:taskId-T/users
 ```
 **Response:**
 ```json
 [
   {
-    "id": 2,
+    "id": 2-U,
     "name": "Bob Smith",
     "email": "bob@example.com"
   }
@@ -118,15 +122,18 @@ GET /projects
 ```json
 [
   {
-    "id": 1,
+    "id": 1-P,
     "name": "Project Alpha",
     "description": "A sample project",
+    "managerId": 1-U,
+    "admins": [2-U],
+    "members": [3-U, 4-U],
     "createdAt": "2025-02-09T12:00:00Z"
   }
 ]
 ```
 
-#### Create a project (Project Manager Only)
+#### Create a project (Any user)
 ```
 POST /projects
 ```
@@ -137,15 +144,26 @@ POST /projects
   "description": "A sample project"
 }
 ```
-
-#### Invite a member to a project
+**Response:**
+```json
+{
+  "id": 1-P,
+  "name": "Project Alpha",
+  "managerId": 1-U,
+  "admins": [],
+  "members": []
+}
 ```
-POST /projects/:projectId/invite
+
+#### Invite a member or admin to a project
+```
+POST /projects/:projectId-P/invite
 ```
 **Request Body:**
 ```json
 {
-  "userId": 2
+  "userId": 2-U,
+  "role": "admin" or "member"
 }
 ```
 
@@ -160,39 +178,41 @@ POST /tasks
 **Request Body:**
 ```json
 {
-  "projectId": 1,
+  "projectId": 1-P,
   "title": "Design UI",
   "description": "Create UI mockups",
-  "assignedTo": 3,
-  "dependencies": 2,
+  "assignedTo": [3-U, 4-U],
+  "prerequisiteTask": 2-T,
+  "status": "In Progress",
   "dueDate": "2025-02-15T12:00:00Z"
 }
 ```
 
-#### Assign a task to a member (Project Manager & Admin Only)
+#### Assign a task to multiple members (Project Manager & Admin Only)
 ```
-POST /tasks/:taskId/assign
+POST /tasks/:taskId-T/assign
 ```
 **Request Body:**
 ```json
 {
-  "userId": 3
+  "userIds": [3-U, 4-U]
 }
 ```
 
 #### Get all tasks for a project
 ```
-GET /projects/:projectId/tasks
+GET /projects/:projectId-P/tasks
 ```
 **Response:**
 ```json
 [
   {
-    "id": 1,
+    "id": 1-T,
     "title": "Design UI",
     "description": "Create UI mockups",
     "status": "In Progress",
-    "assignedTo": 3,
+    "assignedTo": [3-U, 4-U],
+    "prerequisiteTask": 2-T,
     "dueDate": "2025-02-15T12:00:00Z"
   }
 ]
@@ -200,12 +220,12 @@ GET /projects/:projectId/tasks
 
 #### Get task status
 ```
-GET /tasks/:taskId/status
+GET /tasks/:taskId-T/status
 ```
 **Response:**
 ```json
 {
-  "taskId": 1,
+  "taskId": 1-T,
   "status": "In Progress"
 }
 ```
@@ -231,7 +251,7 @@ GET /search?query=Alpha&type=project
 ```json
 [
   {
-    "id": 1,
+    "id": 1-P,
     "name": "Project Alpha",
     "description": "A sample project",
     "createdAt": "2025-02-09T12:00:00Z"
@@ -242,7 +262,9 @@ GET /search?query=Alpha&type=project
 ---
 
 ## Notes
-- The `assignedTo` field in tasks refers to a user's ID.
-- Only project managers can create projects and invite members.
-- Both project managers and admins can create and assign tasks.
+- Any user can create a project and becomes its manager.
+- A project can have a manager, admins, and normal members.
+- Only project managers can invite users as members or admins.
+- Tasks can have prerequisite tasks and be assigned to multiple members.
 - Authentication is required for all requests.
+
