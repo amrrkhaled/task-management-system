@@ -133,28 +133,40 @@ GET /projects
 ]
 ```
 
-#### Create a project (Any user)
-```
+### Create a Project (Any User)
+
+### Endpoint
+```http
 POST /projects
 ```
-**Request Body:**
+
+### Request Body
 ```json
 {
   "name": "Project Alpha",
-  "description": "A sample project"
+  "description": "A sample project",
+  "attachments": [
+    "s3://your-bucket-name/project-alpha/file1.pdf",
+    "s3://your-bucket-name/project-alpha/image.png"
+  ]
 }
 ```
-**Response:**
+
+### Response
 ```json
 {
-  "id": 1-P,
+  "id": "1-P",
   "name": "Project Alpha",
-  "managerId": 1-U,
+  "description": "A sample project",
+  "attachments": [
+    "s3://your-bucket-name/project-alpha/file1.pdf",
+    "s3://your-bucket-name/project-alpha/image.png"
+  ],
+  "managerId": "1-U",
   "admins": [],
   "members": []
 }
 ```
-
 #### Invite a member or admin to a project
 ```
 POST /projects/:projectId-P/invite
