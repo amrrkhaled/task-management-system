@@ -39,4 +39,210 @@ This is a **high-performance backend system** designed for **task management app
 - **GitHub Actions** (CI/CD Pipeline)  
 - **Swagger / Postman** (API Documentation)  
 
-## 🔗 **How It Works?**  
+## 🔗 **How Api Works?**  
+# Task Management System API Documentation
+
+## Authentication
+All endpoints require authentication using a Bearer token.
+
+---
+
+## Endpoints
+
+### Users
+
+#### Register a new user
+```
+POST /users/register
+```
+**Request Body:**
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "securepassword"
+}
+```
+
+#### Login
+```
+POST /users/login
+```
+**Request Body:**
+```json
+{
+  "email": "john@example.com",
+  "password": "securepassword"
+}
+```
+
+#### Get all users for a project
+```
+GET /projects/:projectId/users
+```
+**Response:**
+```json
+[
+  {
+    "id": 1,
+    "name": "Alice Johnson",
+    "email": "alice@example.com"
+  }
+]
+```
+
+#### Get all users for a task
+```
+GET /tasks/:taskId/users
+```
+**Response:**
+```json
+[
+  {
+    "id": 2,
+    "name": "Bob Smith",
+    "email": "bob@example.com"
+  }
+]
+```
+
+---
+
+### Projects
+
+#### Get all projects
+```
+GET /projects
+```
+**Response:**
+```json
+[
+  {
+    "id": 1,
+    "name": "Project Alpha",
+    "description": "A sample project",
+    "createdAt": "2025-02-09T12:00:00Z"
+  }
+]
+```
+
+#### Create a project (Project Manager Only)
+```
+POST /projects
+```
+**Request Body:**
+```json
+{
+  "name": "Project Alpha",
+  "description": "A sample project"
+}
+```
+
+#### Invite a member to a project
+```
+POST /projects/:projectId/invite
+```
+**Request Body:**
+```json
+{
+  "userId": 2
+}
+```
+
+---
+
+### Tasks
+
+#### Create a task (Project Manager & Admin Only)
+```
+POST /tasks
+```
+**Request Body:**
+```json
+{
+  "projectId": 1,
+  "title": "Design UI",
+  "description": "Create UI mockups",
+  "assignedTo": 3,
+  "dependencies": 2,
+  "dueDate": "2025-02-15T12:00:00Z"
+}
+```
+
+#### Assign a task to a member (Project Manager & Admin Only)
+```
+POST /tasks/:taskId/assign
+```
+**Request Body:**
+```json
+{
+  "userId": 3
+}
+```
+
+#### Get all tasks for a project
+```
+GET /projects/:projectId/tasks
+```
+**Response:**
+```json
+[
+  {
+    "id": 1,
+    "title": "Design UI",
+    "description": "Create UI mockups",
+    "status": "In Progress",
+    "assignedTo": 3,
+    "dueDate": "2025-02-15T12:00:00Z"
+  }
+]
+```
+
+#### Get task status
+```
+GET /tasks/:taskId/status
+```
+**Response:**
+```json
+{
+  "taskId": 1,
+  "status": "In Progress"
+}
+```
+
+---
+
+### Search
+
+#### Advanced search for projects or tasks
+```
+GET /search
+```
+**Query Parameters:**
+- `query` (string) - Search term
+- `type` (string) - Either "project" or "task"
+
+**Example Request:**
+```
+GET /search?query=Alpha&type=project
+```
+
+**Response:**
+```json
+[
+  {
+    "id": 1,
+    "name": "Project Alpha",
+    "description": "A sample project",
+    "createdAt": "2025-02-09T12:00:00Z"
+  }
+]
+```
+
+---
+
+## Notes
+- The `assignedTo` field in tasks refers to a user's ID.
+- Only project managers can create projects and invite members.
+- Both project managers and admins can create and assign tasks.
+- Authentication is required for all requests.
