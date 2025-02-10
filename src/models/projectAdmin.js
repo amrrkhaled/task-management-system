@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
     const ProjectAdmin = sequelize.define("ProjectAdmin", {}, { timestamps: false });
   
     ProjectAdmin.associate = (models) => {
