@@ -1,15 +1,26 @@
 {
-  "dependencies": {
-    "aws-sdk": "^2.1692.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "ioredis": "^5.5.0",
-    "multer": "^1.4.5-lts.1",
-    "pg": "^8.13.1",
-    "pg-hstore": "^2.3.4",
-    "redis": "^4.7.0",
-    "sequelize": "^6.37.5",
-    "socket.io": "^4.8.1"
-  }
+    "scripts": {
+        "start": "node --require dotenv/config src/server.js"
+    },
+    "type": "module",
+    "dependencies": {
+        "@aws-sdk/client-ses": "^3.744.0",
+        "@aws-sdk/client-sqs": "^3.744.0",
+        "aws-sdk": "^2.1692.0",
+        "bcrypt": "^5.1.1",
+        "body-parser": "^1.20.3",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2",
+        "ioredis": "^5.5.0",
+        "jsonwebtoken": "^9.0.2",
+        "multer": "^1.4.5-lts.1",
+        "pg": "^8.13.1",
+        "pg-hstore": "^2.3.4",
+        "redis": "^4.7.0",
+        "sequelize": "^6.37.5",
+        "socket.io": "^4.8.1",
+        "swagger-jsdoc": "^6.2.8",
+        "swagger-ui-express": "^5.0.1"
+    }
 }
