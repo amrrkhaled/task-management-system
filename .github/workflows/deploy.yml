@@ -12,19 +12,19 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.EC2_SSH_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
+
       - name: Deploy to EC2
         run: |
-          ssh ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-          cd ~/task-management-system
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+          cd ~/task-management-system  # Change to your project directory
           git pull origin main
-          npm install
-          pm2 restart backend
+          npm install  # Install dependencies
+          pm2 restart backend || pm2 start npm --name backend -- start  # Restart the app with PM2
           EOF
