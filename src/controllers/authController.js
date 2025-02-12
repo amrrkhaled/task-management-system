@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import db from "../models/index.js";  
 import { generateToken, verifyToken } from "../middlewares/authMiddleware.js";
@@ -65,7 +66,7 @@ export const forgotPassword = async (req, res) => {
             return res.status(404).send("User not found");
         }
 
-        const resetCode = Math.floor(100000 + Math.random() * 900000).toString();
+        const resetCode = crypto.randomInt(100000, 999999).toString();
         await redisClient.setex(`resetCode:${email}`, 600, resetCode);
 
         queueEmail("amrkhaledsaada1@gmail.com", "resetPassword", { code: resetCode });
