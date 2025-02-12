@@ -235,3 +235,17 @@
     border-radius: 4px;
     transition: width 0.3s ease;
   }
+
+  .create-project-buttons {
+    width: 100%;
+    border: none;
+    background-color: #1e40af;
+    color: #e2e8f0;
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+  } 
+
+  .create-project-button:hover {
+    background-color: #2563eb;
+  }

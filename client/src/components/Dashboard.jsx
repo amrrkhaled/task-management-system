@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Icons from "../assets/Icons";
 import "../styles/dashboard.css";
+import CreateProject from "../components/CreateProject";
 
 const mockProjects = [
   { id: 1, name: "Website Redesign", progress: 70, isOwner: true },
@@ -135,6 +137,11 @@ const Dashboard = () => {
                     </div>
                   ))}
               </div>
+              <Link to="/create-project">
+                <button className="create-project-buttons">
+                  Create Project
+                </button>
+              </Link>
             </div>
           </div>
         </div>
