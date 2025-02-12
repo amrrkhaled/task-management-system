@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "../styles/login.css";
+import Dashboard from "../components/Dashboard";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -68,6 +69,11 @@ function Login() {
               <Link to="/forget-password" className="login-link">Forgot Password?</Link>
               <p>Don't have an account? <Link to="/register" className="login-link">Register Now!</Link></p>
             </div>
+            <Link to="/dashboard">
+                <button className="create-project-buttons">
+                  Dashboard
+                </button>
+              </Link>
           </form>
         </div>
       </div>
