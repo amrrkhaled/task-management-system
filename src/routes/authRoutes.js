@@ -159,15 +159,44 @@ router.post("/reset-password", authController.resetPassword);
  * @swagger
  * /logout:
  *   post:
- *     summary: Logout user
- *     tags: [Auth]
+ *     tags:
+ *       - Authentication
+ *     summary: User Logout
+ *     description: Logs out the authenticated user by adding their JWT token to a blacklist.
+ *     operationId: userLogout
  *     security:
- *       - BearerAuth: []
+ *       - bearerAuth: []  # JWT Bearer token required for authentication
  *     responses:
  *       200:
- *         description: Logged out successfully
+ *         description: Successfully logged out.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Successfully logged out."
  *       401:
- *         description: Unauthorized
+ *         description: Unauthorized - Invalid or missing token.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Unauthorized"
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Internal Server Error"
  */
 router.post("/logout", verifyToken, authController.logout);
 

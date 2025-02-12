@@ -5,7 +5,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 const redisClient = new Redis(); 
 
 export const generateToken = (user) => {
-  return jwt.sign({ id: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET, {
+  return jwt.sign({ id: user.id, email: user.email, username: user.username }, SECRET_KEY, {
     expiresIn: "1h",
   });
 };
@@ -24,7 +24,7 @@ export const verifyToken = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, SECRET_KEY);
     req.user = decoded;
     next();
   } catch (err) {
