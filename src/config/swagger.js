@@ -15,6 +15,16 @@ const options = {
       description: "API documentation",
     },
     servers: [{ url: "http://localhost:5000" }],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT", // This tells Swagger to expect a JWT token
+        },
+      },
+    },
+    security: [{ bearerAuth: [] }], // Apply security globally (optional)
   },
   apis: [path.join(__dirname, "../routes/*.js")], // Ensure this path matches your structure
 };

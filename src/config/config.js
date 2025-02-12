@@ -2,7 +2,7 @@ const config = {
     development: {
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      database: "task_management_system",
+      database: "task-management-system",
       host: process.env.DB_HOST,
       dialect: "postgres",
     },
@@ -16,7 +16,7 @@ const config = {
     production: {
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      database: "task_management_system",
+      database: "task-management-system",
       host: process.env.DB_HOST,
       dialect: "postgres",
     },
