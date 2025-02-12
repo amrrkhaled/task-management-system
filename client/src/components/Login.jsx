@@ -71,7 +71,7 @@ function Login() {
             </div>
             <Link to="/dashboard">
                 <button className="create-project-buttons">
-                  Dashboard
+                  home
                 </button>
               </Link>
           </form>
