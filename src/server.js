@@ -8,7 +8,7 @@ import db from "./models/index.js" // Ensure correct path to models
 
 const app = express();
 
-const cors = require("cors");
+
 
 app.use(cors({ 
     origin: "*", // Change to specific frontend domain if needed
