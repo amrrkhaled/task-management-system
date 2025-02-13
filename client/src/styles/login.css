@@ -106,6 +106,35 @@
   font-size: 14px;
 }
 
+.password-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.toggle-password-button {
+  position: absolute;
+  right: 10px;
+  top: 40%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eye-icon {
+  width: 20px;
+  height: 20px;
+  color: #666;
+}
+
+.toggle-password-button:hover .eye-icon {
+  color: #333;
+}
+
 .login-link {
   color: #007BFF;
   text-decoration: none;

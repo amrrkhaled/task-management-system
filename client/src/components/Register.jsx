@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Eye, EyeOff } from 'lucide-react';
 import "../styles/register.css";
 
 function Register() {
@@ -8,6 +9,7 @@ function Register() {
   const [username, setUsername] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const API_URL = "http://13.60.154.39:5000/register"; 
 
@@ -80,14 +82,28 @@ function Register() {
             </div>
 
             <div className="input-group">
-              <input
-                type="password"
-                className="register-input"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+              <div className="password-input-container">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="register-input"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  className="toggle-password-button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? (
+                    <EyeOff className="eye-icon" />
+                  ) : (
+                    <Eye className="eye-icon" />
+                  )}
+                </button>
+              </div>
             </div>
 
             <button type="submit" className="register-button">Register</button>

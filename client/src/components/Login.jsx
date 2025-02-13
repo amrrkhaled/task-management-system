@@ -1,11 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Eye, EyeOff } from 'lucide-react';
 import "../styles/login.css";
-import Dashboard from "../components/Dashboard";
 
-function Login() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -23,8 +24,8 @@ function Login() {
       
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem("token", data.token); // Store token for authentication
-        navigate("/dashboard"); // Redirect to Dashboard
+        localStorage.setItem("token", data.token);
+        navigate("/dashboard");
       } else {
         setError("Invalid credentials. Please try again.");
       }
@@ -39,7 +40,9 @@ function Login() {
         <div className="login-card">
           <h2 className="login-title">Welcome Back!</h2>
           <p className="login-subtitle">Login to your account</p>
+          
           {error && <p className="login-error">{error}</p>}
+
           <form className="login-form" onSubmit={handleSubmit}>
             <div className="input-group">
               <input
@@ -53,32 +56,48 @@ function Login() {
             </div>
 
             <div className="input-group">
-              <input
-                type="password"
-                className="login-input"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+              <div className="password-input-container">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="login-input"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  className="toggle-password-button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? (
+                    <EyeOff className="eye-icon" />
+                  ) : (
+                    <Eye className="eye-icon" />
+                  )}
+                </button>
+              </div>
             </div>
 
             <button type="submit" className="login-button">Login</button>
 
             <div className="login-links">
-              <Link to="/forget-password" className="login-link">Forgot Password?</Link>
-              <p>Don't have an account? <Link to="/register" className="login-link">Register Now!</Link></p>
-            </div>
-            <Link to="/dashboard">
-                <button className="create-project-buttons">
-                  dashboard
-                </button>
+              <Link to="/forget-password" className="login-link">
+                Forgot Password?
               </Link>
+              <p>
+                Don't have an account?{" "}
+                <Link to="/register" className="login-link">
+                  Register Now!
+                </Link>
+              </p>
+            </div>
           </form>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Login;
