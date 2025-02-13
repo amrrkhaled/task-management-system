@@ -8,7 +8,11 @@ import db from "./models/index.js" // Ensure correct path to models
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://collabtask.me',  // Cannot use '*' with credentials
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
