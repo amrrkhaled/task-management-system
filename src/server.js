@@ -14,7 +14,7 @@ const corsOptions = {
   origin: ["https://www.collabtask.me", "http://localhost:5000"], // ✅ Explicitly allow frontend domains
   methods: "GET,POST,PUT,DELETE,OPTIONS",
   allowedHeaders: "Content-Type,Authorization",
-  credentials: true, s
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
