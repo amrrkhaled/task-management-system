@@ -20,7 +20,7 @@ app.use(authRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-db.sequelize.sync({ alter: true }) // Change to `force: true` if you want to reset tables
+db.sequelize.sync({ alter: false }) // Change to `force: true` if you want to reset tables
   .then(() => {
     console.log("Database synchronized successfully.");
     app.listen(PORT, () => {
