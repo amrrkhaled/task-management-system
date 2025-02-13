@@ -14,7 +14,7 @@ const options = {
       version: "1.0.0",
       description: "API documentation",
     },
-    servers: [{ url: "http://localhost:5000" }],
+    servers: [{ url: "http://13.60.154.39:5000" }],
     components: {
       securitySchemes: {
         bearerAuth: {
