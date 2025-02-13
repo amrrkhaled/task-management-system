@@ -20,7 +20,6 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-// ✅ Function to Load Models Asynchronously
 async function loadModels() {
   const modelFiles = fs.readdirSync(__dirname)
     .filter((file) => file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js");
@@ -31,9 +30,8 @@ async function loadModels() {
     db[model.name] = model;
   });
 
-  await Promise.all(modelImports); // ✅ Ensure all models are loaded first
+  await Promise.all(modelImports); 
 
-  // ✅ Associate Models after they are fully loaded
   Object.keys(db).forEach((modelName) => {
     if (db[modelName].associate) {
       db[modelName].associate(db);
@@ -44,7 +42,6 @@ async function loadModels() {
   db.Sequelize = Sequelize;
 }
 
-// ✅ Load models before exporting `db`
 await loadModels();
 
 export default db;

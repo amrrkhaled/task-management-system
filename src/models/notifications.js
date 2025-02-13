@@ -11,7 +11,6 @@ export default (sequelize, DataTypes) => {
     );
   
     Notification.associate = (models) => {
-      // ✅ FIX: Add "through" table to belongsToMany
       Notification.belongsToMany(models.User, { through: "UserNotifications" });
     };
   

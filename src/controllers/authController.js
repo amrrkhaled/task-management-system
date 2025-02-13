@@ -21,9 +21,9 @@ export const register = async (req, res) => {
         if (user) {
             return res.status(409).send("User already exists");
         } else {
-            await User.create({ email, username, password: hashedPassword });
+            await User.create({ email:email, username:username, password: hashedPassword });
             res.send("User registered successfully");
-            queueEmail("amrkhaledsaada1@gmail.com", "newAccount", {});
+            queueEmail(email, "newAccount", {});
 
         }
     } catch (err) {
