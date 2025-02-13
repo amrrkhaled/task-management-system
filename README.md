@@ -19,6 +19,7 @@ This is a **high-performance backend system** designed for **task management app
 ✅ **Secure API:** Uses JWT authentication and follows best security practices.  
 ✅ **Automated Deployment:** Hosted on **Railway (Free)** and **AWS EC2 (Free Tier)**.  
 
+
 ## 🛠 **Tech Stack**  
 
 ### **Backend Technologies**  
