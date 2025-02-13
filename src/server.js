@@ -8,7 +8,14 @@ import db from "./models/index.js" // Ensure correct path to models
 
 const app = express();
 
-app.use(cors());
+const cors = require("cors");
+
+app.use(cors({ 
+    origin: "*", // Change to specific frontend domain if needed
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization"
+}));
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
