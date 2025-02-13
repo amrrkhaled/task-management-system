@@ -11,7 +11,7 @@ This is a **high-performance backend system** designed for **task management app
 ✅ **Real-Time Collaboration:** Instant updates across all connected users.  
 ✅ **File Storage:** Upload and manage files using **AWS S3**.  
 ✅ **Notifications:** Get alerts via **AWS SNS** or Web Push Notifications.  
-✅ **Task Queues:** **Redis-based BullMQ** or **AWS SQS** for background processing.  
+✅ **Task Queues:** **AWS SQS** for background processing.  
 ✅ **Caching:** **Redis** to optimize performance.  
 ✅ **Scalable & Cloud-Powered:** Designed for **high traffic** and **growing teams**.  
 ✅ **Search & Filtering:** PostgreSQL full-text search for fast retrieval.  
