@@ -11,7 +11,7 @@ function Register() {
   const [success, setSuccess] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
-  const API_URL = "http://13.60.154.39:5000/register"; 
+  const API_URL = "https://api.collabtask.me/register"; 
 
   const handleSubmit = async (event) => {
     event.preventDefault();

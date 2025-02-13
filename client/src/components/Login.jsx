@@ -14,7 +14,7 @@ const Login = () => {
     event.preventDefault();
     setError(null);
     try {
-      const response = await fetch("http://13.60.154.39:5000/login", {
+      const response = await fetch("https://api.collabtask.me/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
