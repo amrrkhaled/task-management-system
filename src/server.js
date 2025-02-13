@@ -28,11 +28,11 @@ db.sequelize.sync({ alter: false }) // Change to `force: true` if you want to re
       console.log(`Server running on port ${PORT}`);
       console.log(`Swagger Docs available at: ${swaggerURL}`);
 
-      setTimeout(() => {
-        import("./workers/emailWorker.js")
-          .then(() => console.log("Queue worker started"))
-          .catch((err) => console.error("Failed to start queue worker:", err));
-      }, 5000); // Start after 5 seconds
+      // setTimeout(() => {
+      //   import("./workers/emailWorker.js")
+      //     .then(() => console.log("Queue worker started"))
+      //     .catch((err) => console.error("Failed to start queue worker:", err));
+      // }, 5000); // Start after 5 seconds
    
    
    
