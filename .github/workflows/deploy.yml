@@ -26,5 +26,5 @@ jobs:
           cd ~/task-management-system  # Change to your project directory
           git pull origin main
           npm install  # Install dependencies
-          pm2 restart backend || pm2 start npm --name backend -- start  # Restart the app with PM2
+          pm2 restart myapp || pm2 start npm --name myapp -- start  # Restart the app with PM2
           EOF
