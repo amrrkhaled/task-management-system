@@ -14,7 +14,7 @@ const options = {
       version: "1.0.0",
       description: "API documentation",
     },
-    servers: [{ url: "http://api.collabtask.me:5000" }],
+    servers: [{ url: "https://api.collabtask.me:5000" }],
     components: {
       securitySchemes: {
         bearerAuth: {
