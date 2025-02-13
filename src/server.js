@@ -10,11 +10,14 @@ const app = express();
 
 
 
-app.use(cors({ 
-    origin: "*", // Change to specific frontend domain if needed
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization"
-}));
+const corsOptions = {
+  origin: "*", // Change this to your frontend's domain for better security
+  methods: "GET,POST,PUT,DELETE,OPTIONS",
+  allowedHeaders: "Content-Type,Authorization",
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
