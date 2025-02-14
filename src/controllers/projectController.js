@@ -26,9 +26,10 @@ export const createProject = async (req, res) => {
     // }
 
     // Step 3: Add Team Members
-    const projectMembers = teamMembers.map(({ userId, role }) => ({
+    const projectMembers = teamMembers.map(({ userId, role,username }) => ({
       projectId: project.id,
       userId,
+      username,
       role,
     }));
 
@@ -49,10 +50,11 @@ export const createProject = async (req, res) => {
     // Step 5: Assign Users to Tasks
     const taskAssignments = [];
     tasks.forEach((task, index) => {
-      task.assignedTo?.forEach((userId) => {
+      task.assignedTo?.forEach(({userId,username}) => {
         taskAssignments.push({
           taskId: taskRecords[index].id,
           userId,
+          username,
         });
       });
     });

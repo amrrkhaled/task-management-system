@@ -6,8 +6,10 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.ENUM("member", "admin"),
         defaultValue: "member",
       },
+      username: { type: DataTypes.STRING, allowNull: true },
       userId: { type: DataTypes.INTEGER, allowNull: false },
       projectId: { type: DataTypes.INTEGER, allowNull: false },
+
     },
     { timestamps: false }
   );

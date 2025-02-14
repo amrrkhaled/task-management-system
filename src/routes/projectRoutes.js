@@ -43,11 +43,15 @@ const router = express.Router();
  *                   type: object
  *                   required:
  *                     - userId
+ *                     - username
  *                     - role
  *                   properties:
  *                     userId:
  *                       type: integer
  *                       example: 2
+ *                     username:
+ *                       type: string
+ *                       example: "john_doe"
  *                     role:
  *                       type: string
  *                       enum: ["admin", "member"]
@@ -70,8 +74,17 @@ const router = express.Router();
  *                     assignedTo:
  *                       type: array
  *                       items:
- *                         type: integer
- *                       example: [2, 3]
+ *                         type: object
+ *                         required:
+ *                           - userId
+ *                           - username
+ *                         properties:
+ *                           userId:
+ *                             type: integer
+ *                             example: 2
+ *                           username:
+ *                             type: string
+ *                             example: "john_doe"
  *     responses:
  *       201:
  *         description: Project created successfully
@@ -96,6 +109,7 @@ const router = express.Router();
  *                     example:
  *                       projectId: "11"
  *                       userId: 2
+ *                       username: "john_doe"
  *                       role: "admin"
  *                 tasks:
  *                   type: array
@@ -104,7 +118,11 @@ const router = express.Router();
  *                     example:
  *                       projectId: "11"
  *                       title: "Setup repo"
- *                       assignedTo: [2, 3]
+ *                       assignedTo:
+ *                         - userId: 2
+ *                           username: "john_doe"
+ *                         - userId: 3
+ *                           username: "jane_smith"
  *       400:
  *         description: Bad request - missing or invalid data
  *       401:
