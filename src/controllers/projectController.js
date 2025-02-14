@@ -3,8 +3,9 @@ import db from "../models/index.js";
 const { sequelize } = db; 
 const { Project, ProjectMember, Task, TaskAssignment,User } = db;  
 export const createProject = async (req, res) => {
-  const { name, description, attachments, teamMembers, tasks } = req.body;
+  const { name, description, attachments = [], teamMembers, tasks } = req.body;
   const managerId = req.user.id;
+  console.log(req.body);
   // const attachments = req.files; // Assuming multer is used
 
   const transaction = await sequelize.transaction();
