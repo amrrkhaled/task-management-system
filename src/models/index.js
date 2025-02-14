@@ -1,9 +1,10 @@
 import fs from "fs";
 import path from "path";
 import { Sequelize } from "sequelize";
-import { fileURLToPath } from "url";
+import { fileURLToPath, pathToFileURL } from "url";
 import process from "process";
 import configData from "../config/config.js";
+import associateModels from "./associations.js"; // ✅ Import associations separately
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,21 +23,27 @@ if (config.use_env_variable) {
 
 async function loadModels() {
   const modelFiles = fs.readdirSync(__dirname)
-    .filter((file) => file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js");
+    .filter((file) => file.endsWith(".js") && file !== basename && file !== "associations.js");
 
-  const modelImports = modelFiles.map(async (file) => {
-    const modelModule = await import(path.join(__dirname, file));
-    const model = modelModule.default(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-  });
+  const modelPromises = modelFiles.map(async (file) => {
+    try {
+      const modelPath = pathToFileURL(path.join(__dirname, file)).href;
+      const modelModule = await import(modelPath);
 
-  await Promise.all(modelImports); 
-
-  Object.keys(db).forEach((modelName) => {
-    if (db[modelName].associate) {
-      db[modelName].associate(db);
+      if (typeof modelModule.default === "function") {
+        const model = modelModule.default(sequelize, Sequelize.DataTypes);
+        db[model.name] = model;
+      } else {
+        console.warn(`⚠️ Warning: ${file} does not export a valid model function.`);
+      }
+    } catch (error) {
+      console.error(`❌ Error loading model ${file}:`, error);
     }
   });
+
+  await Promise.allSettled(modelPromises); // ✅ Ensures all models are loaded before moving on
+
+  associateModels(db); // ✅ Apply associations properly after models are loaded
 
   db.sequelize = sequelize;
   db.Sequelize = Sequelize;

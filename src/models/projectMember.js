@@ -6,14 +6,11 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.ENUM("member", "admin"),
         defaultValue: "member",
       },
+      userId: { type: DataTypes.INTEGER, allowNull: false },
+      projectId: { type: DataTypes.INTEGER, allowNull: false },
     },
-    { timestamps: false } // No need for timestamps unless required
+    { timestamps: false }
   );
-
-  ProjectMember.associate = (models) => {
-    ProjectMember.belongsTo(models.User, { foreignKey: "userId" });
-    ProjectMember.belongsTo(models.Project, { foreignKey: "projectId" });
-  };
 
   return ProjectMember;
 };

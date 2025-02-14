@@ -10,12 +10,5 @@ export default (sequelize, DataTypes) => {
     { timestamps: true }
   );
 
-  Task.associate = (models) => {
-    Task.belongsTo(models.Project, { foreignKey: "projectId" });
-    Task.belongsToMany(models.User, { through: models.TaskAssignment });
-    Task.hasMany(models.Comment, { foreignKey: "taskId" });
-    Task.hasMany(models.Attachment, { foreignKey: "taskId" });
-  };
-
   return Task;
 };
