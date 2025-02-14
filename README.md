@@ -34,7 +34,7 @@ This is a **high-performance backend system** designed for **task management app
 - **AWS S3** (File Storage)  
 - **AWS SES** (Emails)  
 - **Redis** (Caching & Task Queues - Hosted on Railway)  
-- **Railway** (Backend Hosting & PostgreSQL Database)  
+- **AWS (EC2 and RDS)** (Backend Hosting & PostgreSQL Database)  
 - **GitHub Actions** (CI/CD for Automated Deployment)  
 
 ### **Development & Deployment**  
