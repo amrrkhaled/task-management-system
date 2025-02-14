@@ -32,6 +32,11 @@ const router = express.Router();
  *               description:
  *                 type: string
  *                 example: "A detailed project description"
+ *               attachments:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 example: ["docs/project-plan.pdf", "images/logo.png"]
  *               teamMembers:
  *                 type: array
  *                 items:
@@ -41,9 +46,8 @@ const router = express.Router();
  *                     - role
  *                   properties:
  *                     userId:
- *                       type: string
- *                       format: uuid
- *                       example: "123e4567-e89b-12d3-a456-426614174000"
+ *                       type: integer
+ *                       example: 2
  *                     role:
  *                       type: string
  *                       enum: ["admin", "member"]
@@ -66,9 +70,8 @@ const router = express.Router();
  *                     assignedTo:
  *                       type: array
  *                       items:
- *                         type: string
- *                         format: uuid
- *                         example: "123e4567-e89b-12d3-a456-426614174000"
+ *                         type: integer
+ *                       example: [2, 3]
  *     responses:
  *       201:
  *         description: Project created successfully
@@ -83,7 +86,7 @@ const router = express.Router();
  *                 project:
  *                   type: object
  *                   example:
- *                     id: "123e4567-e89b-12d3-a456-426614174000"
+ *                     id: "11"
  *                     name: "New Project"
  *                     description: "A detailed project description"
  *                 members:
@@ -91,17 +94,17 @@ const router = express.Router();
  *                   items:
  *                     type: object
  *                     example:
- *                       projectId: "123e4567-e89b-12d3-a456-426614174000"
- *                       userId: "987e4567-e89b-12d3-a456-426614174999"
+ *                       projectId: "11"
+ *                       userId: 2
  *                       role: "admin"
  *                 tasks:
  *                   type: array
  *                   items:
  *                     type: object
  *                     example:
- *                       projectId: "123e4567-e89b-12d3-a456-426614174000"
+ *                       projectId: "11"
  *                       title: "Setup repo"
- *                       assignedTo: ["123e4567-e89b-12d3-a456-426614174000"]
+ *                       assignedTo: [2, 3]
  *       400:
  *         description: Bad request - missing or invalid data
  *       401:
