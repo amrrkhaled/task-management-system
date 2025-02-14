@@ -3,6 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { swaggerUi, swaggerSpec } from "./config/swagger.js";
 import authRoutes from "./routes/authRoutes.js";
+import projectRoutes from "./routes/projectRoutes.js";
 import db from "./models/index.js" // Ensure correct path to models
 
 
@@ -28,10 +29,11 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 global.onlineUsers = new Map();
 app.use(authRoutes);
+app.use(projectRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-db.sequelize.sync({ alter: false }) // Change to `force: true` if you want to reset tables
+db.sequelize.sync({ alter: true }) // Change to `force: true` if you want to reset tables
   .then(() => {
     console.log("Database synchronized successfully.");
     app.listen(PORT, () => {
