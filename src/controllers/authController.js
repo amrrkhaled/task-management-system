@@ -50,7 +50,9 @@ export const login = async (req, res) => {
         }
 
         const token = generateToken(user);
+        queueEmail(email, "login", {});
         res.json({ token });
+
     } catch (err) {
         console.log(err);
         res.status(500).send("Error while logging in");

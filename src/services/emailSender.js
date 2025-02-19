@@ -12,6 +12,10 @@ export async function sendEmail(toEmail, messageType, extraData = {}) {
       subject = "New Account";
       body = `Hello,\n\nWelcome to our platform!\n\nIf you didn't request this, ignore it.`;
       break;
+      case "login":
+      subject = "login";
+      body = `Hello,\n\nWelcome to our platform!\n\nIf you didn't request this, ignore it.`;
+      break;
     case "projectInvitationAdmin":
       subject = "Project Assignment (Admin)";
       body = `Hello,\n\nYou've been assigned as an admin to "${extraData.projectName}".`;
