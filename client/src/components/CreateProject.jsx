@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Upload, Users, Plus } from 'lucide-react';
-import { mockProjects, currentUser } from '../db';
+import { mockProjects, currentUser } from '../Db';
 import '../styles/createProject.css';
 
 const CreateProject = () => {
