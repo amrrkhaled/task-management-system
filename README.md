@@ -7,17 +7,16 @@ This is a **high-performance backend system** designed for **task management app
 
 ## 🎯 **Key Features**  
 
-✅ **Task Management:** Create, update, assign, and track tasks seamlessly.  
-✅ **Real-Time Collaboration:** Instant updates across all connected users.  
-✅ **File Storage:** Upload and manage files using **AWS S3**.  
-✅ **Notifications:** Get alerts via **AWS SNS** or Web Push Notifications.  
-✅ **Task Queues:** **Redis-based BullMQ** or **AWS SQS** for background processing.  
-✅ **Caching:** **Redis** to optimize performance.  
-✅ **Scalable & Cloud-Powered:** Designed for **high traffic** and **growing teams**.  
-✅ **Search & Filtering:** PostgreSQL full-text search for fast retrieval.  
-✅ **CI/CD Pipeline:** Automated testing and deployment with **GitHub Actions**.  
-✅ **Secure API:** Uses JWT authentication and follows best security practices.  
-✅ **Automated Deployment:** Hosted on **Railway (Free)** and **AWS EC2 (Free Tier)**.  
+- **Real-Time Collaboration:** Instant updates across all connected users.  
+- **Task Management:** Create, update, assign, and track tasks seamlessly.  <!-- - **Notifications:** Get alerts via **AWS SNS** or Web Push Notifications.  -->
+- **File Storage:** Upload and manage files using **AWS S3**.  
+- **Search & Filtering:** PostgreSQL full-text search for fast retrieval.  
+- **Task Queues:** **AWS SQS** for background processing.  
+- **Caching:** **Redis** to optimize performance.  
+- **Secure API:** Uses JWT authentication and follows best security practices.  
+- **CI/CD Pipeline:** Automated testing and deployment with **GitHub Actions**.  
+- **Scalable & Cloud-Powered:** Designed for **high traffic** and **growing teams**.  
+- **Automated Deployment:** Hosted on **Railway** and **AWS EC2**.  
 
 ## 🛠 **Tech Stack**  
 
@@ -30,13 +29,24 @@ This is a **high-performance backend system** designed for **task management app
 
 ### **Cloud Services & Integrations**  
 - **AWS S3** (File Storage)  
-- **AWS SNS** (Notifications)  
-- **Redis** (Caching & Task Queues - Hosted on Railway)  
-- **Railway** (Backend Hosting & PostgreSQL Database)  
+- **AWS SES** (Emails)  
+- **Redis** (Caching & Task Queues)  
+- **AWS (EC2 and RDS)** (Backend Hosting & PostgreSQL Database)  
 - **GitHub Actions** (CI/CD for Automated Deployment)  
 
 ### **Development & Deployment**  
 - **GitHub Actions** (CI/CD Pipeline)  
-- **Swagger / Postman** (API Documentation)  
+- **Swagger Documentation** (API Reference)  
 
-## 🔗 **How It Works?**  
+
+## 🚀 **System Architecture**
+```
+Frontend (React.js) ---> Backend (Node.js & Express) ---> PostgreSQL (Database)
+                                        |                          |
+                                       Redis                      AWS S3 (File Storage)
+                                        |
+                                  AWS SQS (Task Queues)
+```
+## 📖 **API Documentation**  
+For detailed API documentation, refer to the **Swagger Documentation**: [API Docs](https://api.collabtask.me/api-docs/)  
+
